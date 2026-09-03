@@ -3,6 +3,9 @@ android-gradle = '9.1.0-alpha08'
 java = '11'
 
 [libraries]
+android-activity = { group = 'androidx.activity', name = 'activity', version = '1.13.0' }
+android-constraintLayout = { group = 'androidx.constraintlayout', name = 'constraintlayout', version = '2.2.2' }
+android-material = { group = 'com.google.android.material', name = 'material', version = '1.14.0' }
 
 [plugins]
 android-application = { id = 'com.android.application', version.ref = 'android-gradle' }
