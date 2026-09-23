@@ -10,6 +10,7 @@ android-espresso-intents = { group = 'androidx.test.espresso', name = 'espresso-
 android-material = { group = 'com.google.android.material', name = 'material', version = '1.14.0' }
 android-test = { group = 'androidx.test', name = 'core', version = '1.7.0' }
 assertJ = { group = 'org.assertj', name = 'assertj-core', version = '3.27.7' }
+guava = { group = 'com.google.guava', name = 'guava', version = '33.7.1-android' }
 jUnit4 = { group = 'junit', name = 'junit', version = '4.13.2' }
 robolectric = { group = 'org.robolectric', name = 'robolectric', version = '4.16.1' }
 
