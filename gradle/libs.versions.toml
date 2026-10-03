@@ -1,22 +1,7 @@
-[versions]
-android-gradle = '9.1.0-alpha08'
-android-sdk-compile = '36'
-java = '21'
-
 [libraries]
-agrona = { group = 'org.agrona', name = 'agrona', version = '2.6.1' }
-android-activity = { group = 'androidx.activity', name = 'activity', version = '1.13.0' }
-android-benchmark = { group = 'androidx.benchmark', name = 'benchmark-junit4', version = '1.5.0' }
-android-constraintLayout = { group = 'androidx.constraintlayout', name = 'constraintlayout', version = '2.2.2' }
-android-espresso-intents = { group = 'androidx.test.espresso', name = 'espresso-intents', version = '3.7.0' }
-android-material = { group = 'com.google.android.material', name = 'material', version = '1.14.0' }
-android-test = { group = 'androidx.test', name = 'core', version = '1.7.0' }
 apache-commons-collections = { group = 'org.apache.commons', name = 'commons-collections4', version = '4.6.0' }
 assertJ = { group = 'org.assertj', name = 'assertj-core', version = '3.27.7' }
-guava = { group = 'com.google.guava', name = 'guava', version = '33.7.1-android' }
-jUnit4 = { group = 'junit', name = 'junit', version = '4.13.2' }
-robolectric = { group = 'org.robolectric', name = 'robolectric', version = '4.16.1' }
+guava = { group = 'com.google.guava', name = 'guava', version = '33.7.2-jre' }
 
-[plugins]
-android-application = { id = 'com.android.application', version.ref = 'android-gradle' }
-android-library = { id = 'com.android.library', version.ref = 'android-gradle' }
+[versions]
+junit = '4.13.2'
