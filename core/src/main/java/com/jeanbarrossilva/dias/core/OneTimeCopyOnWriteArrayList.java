@@ -89,11 +89,11 @@ public class OneTimeCopyOnWriteArrayList<Element> extends ArrayList<Element> {
     static final int IMMUTABLE_TREE_SET_LIKE =
       DEFAULT | DISTINCT | IMMUTABLE | NONNULL | ORDERED | SORTED;
 
-    public Spliterator() {
+    private Spliterator() {
       this(/* startIndex = */ 0, /* endIndex = */ backingArray.length);
     }
 
-    public Spliterator(final int startIndex, final int endIndex) {
+    private Spliterator(final int startIndex, final int endIndex) {
       this.currentIndex = startIndex;
       this.endIndex = endIndex;
     }
@@ -143,7 +143,7 @@ public class OneTimeCopyOnWriteArrayList<Element> extends ArrayList<Element> {
     private int startIndex;
     private int endIndex;
 
-    Sublist(
+    private Sublist(
       final int startIndex,
       final int endIndex
     ) throws IndexOutOfBoundsException {
@@ -261,11 +261,11 @@ public class OneTimeCopyOnWriteArrayList<Element> extends ArrayList<Element> {
     private int endIndex;
     private boolean isImmutable;
 
-    public Iterator() {
+    private Iterator() {
       this(/* startIndex = */ 0, /* endIndex = */ backingArray.length);
     }
 
-    public Iterator(final int startIndex, final int endIndex) {
+    private Iterator(final int startIndex, final int endIndex) {
       checkFromToIndex(startIndex, endIndex, size());
       this.previousIndex = startIndex - 1;
       this.endIndex = endIndex;

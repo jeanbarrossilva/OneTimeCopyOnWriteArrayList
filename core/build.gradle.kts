@@ -15,6 +15,7 @@ java {
 dependencies {
   api(libs.agrona)
   implementation(libs.guava)
+  testImplementation(project(":core-test"))
   testImplementation(libs.apache.commons.collections)
   testImplementation(libs.assertJ)
   testImplementation(libs.jUnit4)
