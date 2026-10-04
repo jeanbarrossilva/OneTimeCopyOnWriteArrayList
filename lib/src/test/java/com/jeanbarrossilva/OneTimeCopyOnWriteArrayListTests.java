@@ -356,6 +356,26 @@ public class OneTimeCopyOnWriteArrayListTests {
           .containsExactlyElementsOf(baseList)
       );
     }
+
+    @SuppressWarnings("MismatchedReadAndWriteOfArray")
+    @Test
+    public void writesToTheArrayToWhichTheListWasConvertedDoesNotReflectOnTheList() {
+      withSampleLists((arrayList, baseList, _) -> {
+        final Integer[] array = arrayList.toArray(new Integer[0]);
+        array[0] = array[1];
+        assertThat(arrayList).first().isSameAs(baseList.getFirst());
+      });
+    }
+
+    @Test
+    public void convertingToArrayTwiceReturnsReferentiallyDifferentArrays() {
+      withAllLists(
+        (arrayList, _, _) -> assertThat(arrayList)
+          .asInstanceOf(type(OneTimeCopyOnWriteArrayList.class))
+          .extracting(OneTimeCopyOnWriteArrayList::toArray, as(ARRAY))
+          .isNotSameAs(arrayList.toArray())
+      );
+    }
   }
 
   public static final class IndexingTests {

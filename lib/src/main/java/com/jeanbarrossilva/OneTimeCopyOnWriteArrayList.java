@@ -70,11 +70,11 @@ public class OneTimeCopyOnWriteArrayList<Element> extends ArrayList<Element> {
   private Element[] backingArray;
   private boolean isImmutableTreeSetLike;
 
-  // this allows us to optimize CoW. this being `false` denotes that we're in
+  // this allows us to optimize CoW. this being `true` denotes that we're in
   // the middle of copying the backing array to this list, and allows us to
   // make so that `toArray()`—which is how CoW gets done through libcore's
   // implementation— returns the backing array directly.
-  private boolean willReturnSafeBackingArray = true;
+  private boolean willReturnUnsafeBackingArray = false;
 
   // ideally, this capacity is the same as the superclass'; but, because the
   // superclass' isn't part of Android API 36.1's libcore's public API, we
@@ -663,7 +663,7 @@ public class OneTimeCopyOnWriteArrayList<Element> extends ArrayList<Element> {
   public Object[] toArray() {
     if (backingArray == null)
       return super.toArray();
-    if (willReturnSafeBackingArray)
+    if (willReturnUnsafeBackingArray)
       // we're (possibly) copying the array to this list, so we don't need to
       // follow the interface contract of always returning a "safe" array.
       // this is for our use, only.
@@ -717,9 +717,9 @@ public class OneTimeCopyOnWriteArrayList<Element> extends ArrayList<Element> {
     // libcore's implementation of addAll() will resort to toArray(), which,
     // normally, would copy the array. but, in this very specific case, copying
     // it isn't what we want; we'll cheat.
-    willReturnSafeBackingArray = false;
+    willReturnUnsafeBackingArray = true;
     super.addAll(this);
-    willReturnSafeBackingArray = true;
+    willReturnUnsafeBackingArray = false;
     backingArray = null;
     isImmutableTreeSetLike = false;
   }
