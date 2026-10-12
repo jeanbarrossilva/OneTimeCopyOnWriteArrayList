@@ -48,6 +48,41 @@ to the array, and will do so indefinitely in case the list is never written to. 
 made, with such copy becoming the source of truth for the list and the one to which the requested write and any subsequent ones are
 performed.
 
+## Performance
+
+A standard array list and ours have a noticeable efficiency gap when they're instantiated, due to ours not copying the backing array.
+
+Besides that, ours also allows opting into an optimization by passing in `true` as the second argument to the class' constructor. This is
+recommended if (and *only if*) the backing array will remain unchanged, and its elements are guaranteed to be sorted, comparable and
+distinct from one another. Doing so enables binary search (instead of linear, which is the default of a standard array list); consequently,
+searching becomes significantly faster.
+
+### Instantiation
+
+| Implementation                | `isImmutableTreeSetLike` | Throughput (ops/s) | Error (±) |
+| ----------------------------- | ------------------------ | ------------------ | --------- |
+| `ArrayList`                   | —                        | 787.787            | 14.998    |
+| `OneTimeCopyOnWriteArrayList` | —                        | 3,892.680          | 90.431    |
+
+### Removal
+
+| Implementation                | `isImmutableTreeSetLike` | Throughput (ops/s) | Error (±) |
+| ----------------------------- | ------------------------ | ------------------ | --------- |
+| `ArrayList`                   | —                        | 1,932.373          | 193.670   |
+| `OneTimeCopyOnWriteArrayList` | `true`                   | 2,076.264          | 38.150    |
+| `OneTimeCopyOnWriteArrayList` | `false`                  | 2,026.245          | 19.749    |
+
+### Search
+
+| Implementation                | `isImmutableTreeSetLike` | Throughput (ops/s) | Error (±)  |
+| ----------------------------- | ------------------------ | ------------------ | ---------- |
+| `ArrayList`                   | —                        | 2,093.485          | 19.526     |
+| `OneTimeCopyOnWriteArrayList` | `true`                   | 40,990,958.064     | 91,738.811 |
+| `OneTimeCopyOnWriteArrayList` | `false`                  | 443.678            | 0.922      |
+
+For the implementation of the above benchmarks, see the
+[`benchmark` source set](https://github.com/jeanbarrossilva/OneTimeCopyOnWriteArrayList/blob/main/lib/src/benchmark/java/com/jeanbarrossilva).
+
 ## Importing
 
 The easiest way to use this library from your code is to copy
