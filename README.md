@@ -81,7 +81,7 @@ searching becomes significantly faster.
 | `OneTimeCopyOnWriteArrayList` | `false`                  | 443.678            | 0.922      |
 
 For the implementation of the above benchmarks, see the
-[`benchmark` source set](https://github.com/jeanbarrossilva/OneTimeCopyOnWriteArrayList/blob/main/lib/src/benchmark/java/com/jeanbarrossilva).
+[`benchmark` source set](https://github.com/jeanbarrossilva/OneTimeCopyOnWriteArrayList/blob/main/lib/src/benchmark/kotlin/com/jeanbarrossilva).
 
 ## Importing
 
