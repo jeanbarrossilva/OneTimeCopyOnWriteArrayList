@@ -18,10 +18,14 @@
 
 plugins {
   `java-library`
+  alias(libs.plugins.kotlin)
+  alias(libs.plugins.kotlin.benchmark)
 }
 
+benchmark.targets.register("benchmark")
 group = "com.jeanbarrossilva"
-java.toolchain.languageVersion = JavaLanguageVersion.of(27)
+java.toolchain.languageVersion = JavaLanguageVersion.of(26)
+sourceSets.create("benchmark")
 repositories.mavenCentral()
 version = "1.0.0"
 
@@ -29,6 +33,14 @@ dependencies {
   implementation(libs.guava)
   testImplementation(libs.apache.commons.collections)
   testImplementation(libs.assertJ)
+}
+
+kotlin.sourceSets.getByName("benchmark") {
+  dependencies {
+    implementation(libs.kotlin.benchmark)
+    implementation(sourceSets.main.get().output)
+    implementation(sourceSets.main.get().runtimeClasspath)
+  }
 }
 
 testing.suites.named<JvmTestSuite>("test") {
