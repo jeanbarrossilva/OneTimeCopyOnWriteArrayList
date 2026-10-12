@@ -57,6 +57,11 @@ recommended if (and *only if*) the backing array will remain unchanged, and its 
 distinct from one another. Doing so enables binary search (instead of linear, which is the default of a standard array list); consequently,
 searching becomes significantly faster.
 
+Benchmarks were performed through [`kotlinx-benchmark`](https://github.com/kotlin/kotlinx-benchmark), with one-million-element array lists
+containing boxed integers from 0 to 999,999 in natural order. The following are the results, which compare an `ArrayList` and a
+`OneTimeCopyOnWriteArrayList`. For the results of ours where the aforementioned optimization was relevant, there's the
+`isImmutableTreeSetLike` column: it holding `true` denotes that it was enabled; `false` means that it was disabled.
+
 ### Instantiation
 
 | Implementation                | `isImmutableTreeSetLike` | Throughput (ops/s) | Error (±) |
